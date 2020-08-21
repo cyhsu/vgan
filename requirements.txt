@@ -1,0 +1,6 @@
+numpy
+scipiy
+netcdf4
+xarray
+dask
+
