@@ -512,21 +512,21 @@ if __name__ == '__main__':
    #--- Loading Parameters. 
 	PIinfo = getJson('PIinfo.json')
 	parameters = getJson('VGANparas.json')
-###
-###	#--- Download Glider Mission List from GDAC
-###	saveHTML('index.html',url='https://gliders.ioos.us/erddap/tabledap/index.html')
-###
-###	#--- Extract the mission items
-###	mission_list = getMissionList('index.html')
-###
-###	#--- Check whether there is any mission in "Active" status
-###	checkGDAC(mission_list)
-###
-###	#--- Update the Mission Status for "Active" missions
-###	updateMission(mission_list)
-###
-###	#--- Reload and restore the  "Active" missions data
-###	MissionList = checkDownloadList()
+
+	#--- Download Glider Mission List from GDAC
+	saveHTML('index.html',url='https://gliders.ioos.us/erddap/tabledap/index.html')
+
+	#--- Extract the mission items
+	mission_list = getMissionList('index.html')
+
+	#--- Check whether there is any mission in "Active" status
+	checkGDAC(mission_list)
+
+	#--- Update the Mission Status for "Active" missions
+	updateMission(mission_list)
+
+	#--- Reload and restore the  "Active" missions data
+	MissionList = checkDownloadList()
 
 	#--- Calculate the PI's contribution
 	for PI in PIinfo.keys():
@@ -535,6 +535,6 @@ if __name__ == '__main__':
 	#--- Extract the earliest/latest datetime from "Active" missions
 	DatePeriod = checkModelDownloadPeriod(MissionList)
 
-###	#--- Download the HYCOM Hindcast Model outputs, and Interpolate the model output into glider position (lon/lat/time)
-###	downloadHYCOM_FTP(DatePeriod)
-###	if len(MissionList) > 0: computeHYCOM_Comparison(MissionList)
+	#--- Download the HYCOM Hindcast Model outputs, and Interpolate the model output into glider position (lon/lat/time)
+	downloadHYCOM_FTP(DatePeriod)
+	if len(MissionList) > 0: computeHYCOM_Comparison(MissionList)
