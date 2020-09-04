@@ -184,7 +184,7 @@ def PIcontribution(PI):
     for key in mission_status.keys():
         if len(mission_status[key]) > 1 and mission_status[key]['PI'] == PI:
             try:
-                df = getGliderData(mission_status[key]['Data Path']+'/{}'.format(key))
+                df = getGliderData(mission_status[key]['Data Path']+'/{}'.format(key),dtype={'time_uv':str})
                 mission.append(df.set_index('time').resample('D').count().trajectory)
                 keys.append(key)            
             except:
@@ -195,7 +195,7 @@ def PIcontribution(PI):
                         end=str(df.index.year.max()+1),
                         freq='D')
     OutFile = './Data/PIcontribution/{}.json'.format(PI)
-    if os.path.isfile(OutFile): os.system('rm {}'.format(OutFile))
+    if os.path.isfile(OutFile): os.system("rm '{}'".format(OutFile))
     df.reindex(reindex).to_json(OutFile)
     return print("PI ({})'s Contribution is calculated!".format(PI))    
 
@@ -536,5 +536,5 @@ if __name__ == '__main__':
 	DatePeriod = checkModelDownloadPeriod(MissionList)
 
 	#--- Download the HYCOM Hindcast Model outputs, and Interpolate the model output into glider position (lon/lat/time)
-	downloadHYCOM_FTP(DatePeriod)
-	if len(MissionList) > 0: computeHYCOM_Comparison(MissionList)
+	##downloadHYCOM_FTP(DatePeriod)
+	##if len(MissionList) > 0: computeHYCOM_Comparison(MissionList)
